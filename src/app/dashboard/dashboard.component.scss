@@ -1,0 +1,49 @@
+body {
+    background-image: url('../../assets/images/background.jpeg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* hauteur égale à 100% de la hauteur de la fenêtre du navigateur */
+    width: 100vw;
+  }
+
+header {
+    background-color:  #ddd;;
+    color: white;
+    height: 80px;
+    display: flex;
+    margin-top: px;
+    align-items: center;
+    justify-content: end;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+  
+  nav li input[type="text"] {
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+  }
+  
+  nav li button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: none;
+    margin-left: 10px;
+  }
+  
+  
+  tr:nth-child(even){background-color: #f2f2f2}
+  
+  tr:hover {background-color: #ddd;}
+
+.custom-card {
+    background-color: #ddd; /* utilisez la variable de couleur Bootstrap que vous préférez */
+  }
