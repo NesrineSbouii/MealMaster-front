@@ -1,0 +1,8 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/0396aa06-2a1d-4bd7-8bf0-12c2e467f605/resourceGroups/MealMaster/providers/Microsoft.Web/sites/meal-master-app",
+    "appService.deploySubpath": "dist/meal-master-frontend",
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ]
+}
