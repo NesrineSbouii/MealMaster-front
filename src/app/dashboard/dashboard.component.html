@@ -4,7 +4,8 @@
 
         <div class="right-content">
             <input type="text" placeholder="Rechercher">
-            <button>Ajouter une image</button>
+            <button (click)="fileInput.click()">Ajouter une image</button>
+            <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)">
         </div>
     </div>
 
@@ -27,7 +28,7 @@
         </div>
         <div class="card custom-card" style="width: 18rem;">
             <img class="card-img-top" style="height: 15rem;"
-                src="https://preppykitchen.com/wp-content/uploads/2022/05/Naked-Cake-Feature.jpg" alt="Card image cap">
+            [src]="imageSrc" *ngIf="imageSrc" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Nom de l'imag</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
