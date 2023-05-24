@@ -11,18 +11,17 @@ export class LoginService {
 
   login(username: string, password: string) {
     // Send a POST request to the Django backend with the username and password
-    return this.http
-      .post(this.baseUrl + '/login/', { username, password })
-      .subscribe(
-        (response: any) => {
-          if (response.token) {
-            // Redirect to "/dashboard" if the response contains a token
-            this.router.navigate(['/dashboard']);
-          }
-        },
-        (error: any) => {
-          // Handle error response
+    const url = this.baseUrl + '/login/';
+    return this.http.post(url, { username, password }).subscribe(
+      (response: any) => {
+        if (response.token) {
+          // Redirect to "/dashboard" if the response contains a token
+          this.router.navigate(['/dashboard']);
         }
-      );
+      },
+      (error: any) => {
+        // Handle error response
+      }
+    );
   }
 }
