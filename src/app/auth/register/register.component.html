@@ -44,13 +44,14 @@
                         required</div>
                 </div>
             </div>
-            <div class="text-danger"  *ngIf="registrationForm.errors && registrationForm.errors['passwordMismatch']" class="error-message">
+            <div class="text-danger" *ngIf="registrationForm.errors && registrationForm.errors['passwordMismatch']"
+                class="error-message">
                 Passwords dose not match.
-              </div>
-              <br>
+            </div>
+            <br>
             <div class="buttons">
-                <button type="submit"  class="button-submit" [disabled]="!registrationForm.valid">Register</button>
-                <button type="button"  (click)="onCancel()">Cancel</button>
+                <button type="submit" class="button-submit" [disabled]="!registrationForm.valid">Register</button>
+                <button type="button" class="button-cancel" (click)="onCancel()">Cancel</button>
             </div>
         </form>
     </div>
