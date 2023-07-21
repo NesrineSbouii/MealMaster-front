@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { UploadImagePopUpComponent } from './dashboard/upload-image-pop-up/upload-image-pop-up.component';
 
 const routes: Routes = [
   {
@@ -12,21 +13,28 @@ const routes: Routes = [
   },
   {
     path: 'login',
-   component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'dashboard',
-   component: DashboardComponent
+    component: DashboardComponent,
   },
   {
     path: 'register',
-   component: RegisterComponent
+    component: RegisterComponent,
   },
-
+  {
+    path: 'upload',
+    component: UploadImagePopUpComponent,
+  },
+  {
+    path: 'galary',
+    component: UploadImagePopUpComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

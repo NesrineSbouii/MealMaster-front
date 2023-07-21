@@ -9,7 +9,6 @@
 }
 
 .header {
-
   padding: 0 30px;
 
   //background-color: #C7C5C7;
@@ -19,26 +18,28 @@
   align-items: center;
   justify-content: space-between;
 
-  img{
+  img {
     width: 7rem;
   }
 
   .right-content {
-
+    display: flex;
     input[type="text"] {
-        padding: 5px;
-        border-radius: 3px;
-        border: none;
-      }
-    
-      button {
-        background-color: #4caf50;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 3px;
-        border: none;
-        margin-left: 10px;
-      }
+      padding: 5px;
+      border-radius: 3px;
+      border: none;
+      display: flex;
+      align-items: center;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 3px;
+      border: none;
+      margin-left: 10px;
+    }
   }
 }
 
@@ -56,4 +57,39 @@ tr:hover {
     background-color: #ddd; /* utilisez la variable de couleur Bootstrap que vous préférez */
     margin-right: 20px;
   }
+}
+/* Styles for the search container */
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #fff;
+  margin-right: 10px;
+}
+
+/* Styles for the search input */
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 16px;
+}
+
+/* Styles for the search button */
+.search-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+/* Styles when the search button is hovered */
+.search-button:hover {
+  background-color: #0056b3;
 }

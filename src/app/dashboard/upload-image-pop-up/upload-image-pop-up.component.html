@@ -1,0 +1,22 @@
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link " [class.active]="!isGaleryTabSelected" (click)="onGaleryTabClicked()">from
+                    computer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="isGaleryTabSelected" (click)="onGaleryTabClicked()">Galery</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div *ngIf="!isGaleryTabSelected" class="right-content">
+            <button class="button-style" (click)="fileInput.click()">importer une image</button>
+            <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)">
+        </div>
+        <ng-container *ngIf="isGaleryTabSelected">
+            <app-image-galry></app-image-galry>
+        </ng-container>
+    </div>
+</div>

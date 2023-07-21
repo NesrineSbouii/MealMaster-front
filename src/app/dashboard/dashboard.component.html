@@ -3,10 +3,13 @@
         <img src="./../assets/images/mealmasterlogo.png" alt="Card image cap">
 
         <div class="right-content">
-            <input type="text" placeholder="Rechercher">
-            <button (click)="fileInput.click()">Ajouter une image</button>
-            <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)">
+            <div class="search-container">
+                <input type="text" placeholder="Search..." class="search-input">
+                <button class="search-button">Search</button>
+            </div>
+            <button (click)="openUploadImage()">Ajouter une image</button>
         </div>
+
     </div>
 
     <div class="image-list">
@@ -28,7 +31,7 @@
         </div>
         <div class="card custom-card" style="width: 18rem;">
             <img class="card-img-top" style="height: 15rem;"
-            [src]="imageSrc" *ngIf="imageSrc" alt="Card image cap">
+                src="https://preppykitchen.com/wp-content/uploads/2022/05/Naked-Cake-Feature.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Nom de l'imag</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the

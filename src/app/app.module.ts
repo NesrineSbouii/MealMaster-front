@@ -9,13 +9,17 @@ import { CustomInterceptor } from './interceptor/customInterceptor';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { UploadImagePopUpComponent } from './dashboard/upload-image-pop-up/upload-image-pop-up.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ImageGalryComponent } from './dashboard/image-galry/image-galry.component';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
+    UploadImagePopUpComponent,
+    ImageGalryComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
   ],
   providers: [
     ImageService,
