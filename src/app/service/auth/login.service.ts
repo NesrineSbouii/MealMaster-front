@@ -16,6 +16,7 @@ export class LoginService {
       (response: any) => {
         if (response.token) {
           // Redirect to "/dashboard" if the response contains a token
+          localStorage.setItem('token', response.token);
           this.router.navigate(['/dashboard']);
         }
       },

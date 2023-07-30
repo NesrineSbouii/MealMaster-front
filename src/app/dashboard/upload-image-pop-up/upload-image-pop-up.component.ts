@@ -34,6 +34,6 @@ export class UploadImagePopUpComponent implements OnInit {
   }
   uploadImage() {
     this.imageService.setFileToUpload(this.fileToUpload);
-    this.imageService.uploadImage();
+    this.imageService.uploadImageFromLocal(this.fileToUpload);
   }
 }

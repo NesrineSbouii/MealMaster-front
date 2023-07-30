@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ImageService } from '../service/images.service';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UploadImagePopUpComponent } from './upload-image-pop-up/upload-image-pop-up.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,20 +14,45 @@ export class DashboardComponent implements OnInit {
   imageSrc: any;
   fileToUpload!: File;
   defaulmodal: NgbModalRef | undefined;
+  @ViewChild('search') searchInput?: ElementRef;
   defaultConfig = {
     keyboard: true,
     class: 'modal-dialog-centered modal-xm',
   };
-  imageList: any[] = [];
+  imageList$$: BehaviorSubject<any[]> = this.imageService.imageList$$;
+  isLoading: boolean = true;
   constructor(
     private imageService: ImageService,
     private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
-    this.imageService.getAllImage().subscribe((images) => {
-      this.imageList = images;
-      //console.log(this.imageList);
+    this.imageService.getAllImage().subscribe(
+      (images) => {
+        this.imageList$$.next(images);
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error fetching images:', error);
+        this.isLoading = false;
+      }
+    );
+
+    this.imageList$$.asObservable().subscribe(() => {
+      this.modalService.dismissAll();
+    });
+  }
+  performImageSearch() {
+    this.isLoading = true;
+    const query = this.searchInput?.nativeElement.value;
+    this.imageService.searchImages(query).subscribe((results) => {
+      this.imageList$$.next(
+        results.map((image) => ({
+          ...image,
+          data: `data:image/jpeg;base64,${image.image_data}`,
+        }))
+      );
+      this.isLoading = false;
     });
   }
 
@@ -44,9 +70,15 @@ export class DashboardComponent implements OnInit {
 
   uploadImage() {
     this.imageService.setFileToUpload(this.fileToUpload);
-    this.imageService.uploadImage();
+    this.imageService.uploadImageFromLocal(this.fileToUpload);
   }
   openUploadImage() {
-    this.modalService.open(UploadImagePopUpComponent, this.defaultConfig);
+    const dialog = this.modalService.open(
+      UploadImagePopUpComponent,
+      this.defaultConfig
+    );
+  }
+  public get images$(): Observable<any[]> {
+    return this.imageList$$.asObservable();
   }
 }

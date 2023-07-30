@@ -14,6 +14,7 @@
         <div *ngIf="!isGaleryTabSelected" class="right-content">
             <button class="button-style" (click)="fileInput.click()">importer une image</button>
             <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)">
+
         </div>
         <ng-container *ngIf="isGaleryTabSelected">
             <app-image-galry></app-image-galry>
