@@ -12,7 +12,7 @@ export NVM_DIR="$HOME/.nvm"
 nvm use 16.20.0
 
 # Install dependencies
-npm install
+npm install -f
 
 # Build your Angular application
 ng build --prod
