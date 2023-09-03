@@ -11,6 +11,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 nvm use 16.20.0
 
+sudo apt-get update
+sudo apt-get install -y apt-utils
 # Install dependencies
 npm install -f
 
