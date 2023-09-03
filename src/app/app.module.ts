@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UploadImagePopUpComponent } from './dashboard/upload-image-pop-up/upload-image-pop-up.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ImageGalryComponent } from './dashboard/image-galry/image-galry.component';
+import { UpdateImageComponent } from './dashboard/update-image/update-image.component';
+import { DeleteComponent } from './dashboard/delete/delete.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +22,8 @@ import { ImageGalryComponent } from './dashboard/image-galry/image-galry.compone
     RegisterComponent,
     UploadImagePopUpComponent,
     ImageGalryComponent,
+    UpdateImageComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,

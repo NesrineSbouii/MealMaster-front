@@ -29,9 +29,9 @@
                             data-bs-placement="bottom" [attr.title]="image.tags.slice(4,image.length).join(',')"
                             *ngIf="image.tags.length > 4">...</span>
                     </div>
-                    <div class="d-flex flex-row gap-2 justify-content-end">
-                        <button class="btn btn-danger delete-btn ">Supprimer</button>
-                        <button class="btn btn-primary edit-btn">Modifier</button>
+                    <div class="d-flex flex-row gap-2 justify-content-end h-100">
+                        <button class="btn btn-danger delete-btn " (click)="deleteopenModal(image)">Supprimer</button>
+                        <button class="btn btn-primary edit-btn" (click)="openModal(image)">Modifier</button>
 
                     </div>
                 </div>

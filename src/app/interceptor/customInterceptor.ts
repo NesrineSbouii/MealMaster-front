@@ -17,7 +17,12 @@ export class CustomInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token');
-    if (token) {
+    console.log(request.url);
+    if (
+      token &&
+      !request.url.includes('/login') &&
+      !request.url.includes('/register')
+    ) {
       request = request.clone({
         headers: request.headers.set('Authorization', 'Token ' + token),
       });

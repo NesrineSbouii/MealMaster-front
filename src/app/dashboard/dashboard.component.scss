@@ -123,3 +123,8 @@ image-loader {
     transform: rotate(360deg);
   }
 }
+
+.card-body {
+  min-height: 170px;
+  justify-content: space-between;
+}

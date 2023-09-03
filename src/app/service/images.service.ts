@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, take } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
@@ -12,7 +12,10 @@ export class ImageService {
 
   imageList$$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private readonly modalservice: NgbModal
+  ) {}
 
   public setFileToUpload(file: File): void {
     this.fileToUpload = file;
@@ -71,6 +74,24 @@ export class ImageService {
     );
   }
 
+  public updateImage(imageid: string, image: any) {
+    const endpoint = environment.baseUrl + '/update_image/' + imageid + '/';
+
+    this.http.put(endpoint, image).subscribe(
+      (response: any) => {
+        this.getAllImage()
+          .pipe(take(1))
+          .subscribe((response) => {
+            this.imageList$$.next(response);
+          });
+        this.modalservice.dismissAll();
+      },
+      (error) => {
+        console.error('Error uploading image:', error);
+      }
+    );
+  }
+
   public getAllImage(): Observable<any[]> {
     const endpoint = environment.baseUrl + '/images_list';
     return this.http.get<any>(endpoint).pipe(
@@ -111,5 +132,10 @@ export class ImageService {
   searchImages(query: string) {
     const endpoint = environment.baseUrl + '/image-search/';
     return this.http.get<any[]>(`${endpoint}?query=${query}`);
+  }
+
+  public deleteImage(id: string) {
+    const endpoint = environment.baseUrl + '/delete_image/' + id + '/';
+    return this.http.delete<any>(endpoint);
   }
 }

@@ -4,6 +4,8 @@ import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UploadImagePopUpComponent } from './upload-image-pop-up/upload-image-pop-up.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { UpdateImageComponent } from './update-image/update-image.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -80,5 +82,17 @@ export class DashboardComponent implements OnInit {
   }
   public get images$(): Observable<any[]> {
     return this.imageList$$.asObservable();
+  }
+  openModal(image: any) {
+    const dialog = this.modalService.open(
+      UpdateImageComponent,
+      this.defaultConfig
+    );
+    dialog.componentInstance.image = image;
+  }
+
+  deleteopenModal(image: any) {
+    const dialog = this.modalService.open(DeleteComponent, this.defaultConfig);
+    dialog.componentInstance.image = image;
   }
 }

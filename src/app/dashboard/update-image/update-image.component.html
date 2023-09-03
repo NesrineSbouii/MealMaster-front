@@ -1,0 +1,18 @@
+<form *ngIf="updateForm" class="edit-image" [formGroup]="updateForm" (ngSubmit)="mettreAJourImage()">
+    <fieldset>
+        <legend>Description de l'image</legend>
+        <label for="description">Description</label>
+        <input type="text" id="description" class="form-control" formControlName="description" />
+    </fieldset>
+
+    <fieldset>
+        <label for="tagToAdd">Tag to add</label>
+        <input type="text" id="tagToAdd" class="form-control" formControlName="tagToAdd" />
+    </fieldset>
+
+    <fieldset>
+        <label for="tagToDelete">Tag to delete</label>
+        <input type="text" id="tagToDelete" class="form-control" formControlName="tagToDelete" />
+    </fieldset>
+    <button type="submit">Mettre à jour</button>
+</form>
