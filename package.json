@@ -43,7 +43,6 @@
     "gojs-angular": "^2.0.6",
     "jsoneditor": "^9.9.2",
     "jwt-decode": "^3.1.2",
-    "ngx-treeview": "^10.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
