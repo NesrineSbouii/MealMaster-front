@@ -1,0 +1,19 @@
+<div class="image-loader" *ngIf="isLoading">
+    <div class="loader-circle"></div>
+</div>
+<div *ngIf="!isLoading" class="deselect-button">
+    <button (click)="deselectAllImages()">Deselect All Images</button>
+</div>
+<div class="image-container">
+
+    <div *ngFor="let image of images" class="image-wrapper">
+        <label class="image-checkbox">
+            <input type="checkbox" [(ngModel)]="image.selected" class="checkbox">
+            <img [src]="image.data" alt="{{ image.name }}" class="image">
+        </label>
+    </div>
+
+</div>
+<div (click)="validate()" class="validate-button">
+    <button>Validate</button>
+</div>

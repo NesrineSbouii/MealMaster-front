@@ -3,44 +3,41 @@
         <img src="./../assets/images/mealmasterlogo.png" alt="Card image cap">
 
         <div class="right-content">
-            <input type="text" placeholder="Rechercher">
-            <button>Ajouter une image</button>
+            <div class="search-container">
+                <input #search type="text" placeholder="Search..." class="search-input">
+                <button (click)="performImageSearch()" class="search-button">Search</button>
+            </div>
+            <button (click)="openUploadImage()">Ajouter une image</button>
         </div>
+
     </div>
 
-    <div class="image-list">
-        <div class="card custom-card" style="width: 18rem;">
-            <img class="card-img-top" style="height: 15rem;"
-                src="https://preppykitchen.com/wp-content/uploads/2022/05/Naked-Cake-Feature.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Nom de l'imag</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <div class="tags">
-                    <span class="tag">Tag1</span>
-                    <span class="tag">Tag2</span>
-                    <span class="tag">Tag3</span>
+    <div class="d-flex justify-content-center align-items-center" *ngIf="isLoading">
+        <div class="loader-circle"></div>
+    </div>
+    <div class="image-list  justify-content-left align-items-start" *ngIf="!isLoading">
+
+        <div *ngFor="let image of images$ |async">
+            <div class="card custom-card" style="width: 18rem;">
+                <img class="card-img-top" style="height: 15rem;" [src]="image.data" alt="{{ image.name }}">
+                <div class="card-body">
+                    <p class="card-text">{{image.description}}</p>
+                    <div class="d-flex flex-row gap-2 mb-2 flex-wrap">
+                        <span *ngFor="let tag of image.tags.slice(0,4)"
+                            class="badge rounded-pill bg-success">{{tag}}</span>
+                        <span class="cursor-pointer	badge rounded-pill bg-success" data-bs-toggle="tooltip"
+                            data-bs-placement="bottom" [attr.title]="image.tags.slice(4,image.length).join(',')"
+                            *ngIf="image.tags.length > 4">...</span>
+                    </div>
+                    <div class="d-flex flex-row gap-2 justify-content-end h-100">
+                        <button class="btn btn-danger delete-btn " (click)="deleteopenModal(image)">Supprimer</button>
+                        <button class="btn btn-primary edit-btn" (click)="openModal(image)">Modifier</button>
+
+                    </div>
                 </div>
-                <button class="btn btn-danger delete-btn">Supprimer</button>
-                <button class="btn btn-primary edit-btn">Modifier</button>
             </div>
         </div>
-        <div class="card custom-card" style="width: 18rem;">
-            <img class="card-img-top" style="height: 15rem;"
-                src="https://preppykitchen.com/wp-content/uploads/2022/05/Naked-Cake-Feature.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Nom de l'imag</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <div class="tags">
-                    <span class="tag">Tag1</span>
-                    <span class="tag">Tag2</span>
-                    <span class="tag">Tag3</span>
-                </div>
-                <button class="btn btn-danger delete-btn">Supprimer</button>
-                <button class="btn btn-primary edit-btn">Modifier</button>
-            </div>
-        </div>
+
     </div>
 
 </div>
