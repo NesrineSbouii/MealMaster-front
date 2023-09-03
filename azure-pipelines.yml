@@ -1,0 +1,72 @@
+trigger:
+  - master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: Build
+    displayName: Build
+    jobs:
+      - job: Build
+        steps:
+          - task: NodeTool@0
+            displayName: "Install Node.js"
+            inputs:
+              versionSpec: "16.x"
+
+          - task: Npm@1
+            displayName: "npm install with force"
+            inputs:
+              command: "custom"
+              customCommand: "install --force"
+          - task: Npm@1
+            displayName: "npm install angular cli"
+            inputs:
+              command: "custom"
+              customCommand: "install -g @angular/cli"
+
+          - task: Npm@1
+            displayName: "build"
+            inputs:
+              command: "custom"
+              customCommand: "run build-prod"
+
+          - publish: dist
+            artifact: dist
+            condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+
+  - stage: Deploy_Dev
+    displayName: "Deployment - DEV"
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+    variables:
+      - group: main
+
+    jobs:
+      - job: Deploy_Dev
+        steps:
+          - checkout: none
+          - download: current
+            artifact: dist
+          - task: replacetokens@3
+            inputs:
+              targetFiles: "$(Pipeline.Workspace)/dist/**/main*.js"
+              encoding: "auto"
+              writeBOM: true
+              verbosity: "detailed"
+              actionOnMissing: "warn"
+              keepToken: false
+              tokenPrefix: "#{"
+              tokenSuffix: "}#"
+              useLegacyPattern: false
+              enableTelemetry: true
+
+          - task: AzureStaticWebApp@0
+            displayName: "Deploy static web app"
+            inputs:
+              workingDirectory: "$(Pipeline.Workspace)/dist"
+              app_location: "/"
+              skip_app_build: true
+              skip_api_build: true
+              azure_static_web_apps_api_token: "$(appDeploymentToken)"
