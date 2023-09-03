@@ -31,6 +31,10 @@ stages:
             inputs:
               command: "custom"
               customCommand: "run build-prod"
+          - name: Ensure apt-utils is installed
+            apt:
+             name: apt-utils
+             state: present
 
           - publish: dist
             artifact: dist
