@@ -3,13 +3,23 @@
         <img src="./../assets/images/mealmasterlogo.png" alt="Card image cap">
 
         <div class="right-content">
+
             <div class="search-container">
                 <input #search type="text" placeholder="Search..." class="search-input">
                 <button (click)="performImageSearch()" class="search-button">Search</button>
             </div>
-            <button (click)="openUploadImage()">Ajouter une image</button>
-        </div>
 
+            <button (click)="openUploadImage()">Ajouter une image</button>
+
+            <div>
+                <img src="./../assets/images/User-Profile-PNG-Image.png" alt="Icône Utilisateur">
+                <p style="color: white; margin-left: 20px;"><strong>{{userName}}</strong></p>
+
+            </div>
+
+            <div><img (click)="performLogout()" class="logout" src="./../assets/images/logout.png"></div>
+
+        </div>
     </div>
 
     <div class="d-flex justify-content-center align-items-center" *ngIf="isLoading">
