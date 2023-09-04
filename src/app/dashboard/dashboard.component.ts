@@ -3,9 +3,11 @@ import { ImageService } from '../service/images.service';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UploadImagePopUpComponent } from './upload-image-pop-up/upload-image-pop-up.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, take } from 'rxjs';
 import { UpdateImageComponent } from './update-image/update-image.component';
 import { DeleteComponent } from './delete/delete.component';
+import { Router } from '@angular/router';
+import { LoginService } from '../service/auth/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +18,7 @@ export class DashboardComponent implements OnInit {
   imageSrc: any;
   fileToUpload!: File;
   defaulmodal: NgbModalRef | undefined;
+  userName: string | undefined;
   @ViewChild('search') searchInput?: ElementRef;
   defaultConfig = {
     keyboard: true,
@@ -25,7 +28,9 @@ export class DashboardComponent implements OnInit {
   isLoading: boolean = true;
   constructor(
     private imageService: ImageService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +47,9 @@ export class DashboardComponent implements OnInit {
 
     this.imageList$$.asObservable().subscribe(() => {
       this.modalService.dismissAll();
+    });
+    this.loginService.curentUser().subscribe((response) => {
+      this.userName = response.username;
     });
   }
   performImageSearch() {
@@ -90,7 +98,13 @@ export class DashboardComponent implements OnInit {
     );
     dialog.componentInstance.image = image;
   }
+  performLogout() {
+    // Supprimer le token du localStorage
+    localStorage.removeItem('token');
 
+    // Rediriger vers la page de connexion
+    this.router.navigate(['/login']);
+  }
   deleteopenModal(image: any) {
     const dialog = this.modalService.open(DeleteComponent, this.defaultConfig);
     dialog.componentInstance.image = image;
